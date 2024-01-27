@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\musa_\\Desktop\\C# Final Project\\CSharp-FinalProject\\CSharp-FinalProject.csproj",
+      "projectUniqueName": "C:\\Users\\musa_\\Desktop\\C# Final Project\\CSharp_FinalProject-\\CSharp-FinalProject.csproj",
       "projectName": "CSharp-FinalProject",
-      "projectPath": "C:\\Users\\musa_\\Desktop\\C# Final Project\\CSharp-FinalProject\\CSharp-FinalProject.csproj",
+      "projectPath": "C:\\Users\\musa_\\Desktop\\C# Final Project\\CSharp_FinalProject-\\CSharp-FinalProject.csproj",
       "packagesPath": "C:\\Users\\musa_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\musa_\\Desktop\\C# Final Project\\CSharp-FinalProject\\obj\\",
+      "outputPath": "C:\\Users\\musa_\\Desktop\\C# Final Project\\CSharp_FinalProject-\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\musa_\\AppData\\Roaming\\NuGet\\NuGet.Config",
