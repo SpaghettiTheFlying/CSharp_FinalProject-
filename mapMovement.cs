@@ -7,6 +7,8 @@ public class Map
     #region VARS
     public int mapBorders;
 
+    private Game _game;
+
     private bool settingMap = true;
 
     private string playerInput;
@@ -14,13 +16,13 @@ public class Map
     public int _playerX;
     public int _playerY;
 
+    private List<Item> items = new List<Item>();
     #endregion
     public void CreateMap() //Main function for map selection
     {
         Console.WriteLine("And I want you to select any map size between those:\n[1]5x5\n[2]7x7\n[3]9x9");
 
         StartMapSelection();
-
 
     }
 
@@ -109,22 +111,85 @@ public class Map
         switch (GetPlayerX, GetPlayerY)
         {
             case (2, -2):
-                //riddler
+                RiddleEvent();
                 break;
             case (4, 4):
-                //necklace
+                Item.Necklace goldNecklace = new Item.Necklace { ItemName = "Golden Necklace" };
+                TakeItem(goldNecklace);
                 break;
             case (1, 2):
-                //letter1
+                Item.Letter letter1 = new Item.Letter("Letter I.", "WRITE SOME TEXT HERE");
+                TakeItem(letter1);
+                letter1.ReadableNotes();
                 break;
-            case (-1, 3):
-                //letter2
-                break;
-
+                
         }
-
+    }
+    
+    public void SetGameInstance(Game game)
+    {
+        _game = game;
+    }
+    public void TakeItem(Item item)
+    {
+        items.Add(item);
+        item.IsTaken = true;
     }
 
+    public void RiddleEvent()
+    {
+        Console.WriteLine("You encounter the Riddler!");
+
+        // Display riddle and options
+        Console.WriteLine("I have keys but open no locks. I have space but no room. You can enter, but you can't go inside. What am I?");
+        Console.WriteLine("[a] A door");
+        Console.WriteLine("[b] A keyboard");
+        Console.WriteLine("[c] A computer");
+        Console.WriteLine("[d] A book");
+        Console.WriteLine("[e] An elevator");
+
+
+        string playerAnswer = Console.ReadLine();
+
+        // Check the answer
+        if (playerAnswer == "b")
+        {
+            Console.WriteLine("Correct! You won!");
+
+        }
+        else if(playerAnswer == null) 
+        {
+            Console.WriteLine("Riddler got bored and gone, left you with your thoughts. You started a family and a decent life. But never found the answer. You died, peacefully.");
+        }
+        else
+        {
+            Console.WriteLine("Wrong answer! The Riddler vanishes. Place collapses. You died.");
+        }
+    }
+
+    public void ExecuteTraps() 
+    { 
+            
+        int[,] deathPoints =  { { -1, 1 }, { -2, -2 }, { 0, 2 }, { 3, -2 }, { 3, 2 }, { 3, 3 }, { 2, 3 }, { 1, -4 }, { -2, 4 }, { 4, 4 } };
+       
+        for (int i = 0; i < 10;  i++) //Going through x coords
+        {
+
+            if (deathPoints[i, 0] == _playerX && deathPoints[i, 1] == _playerY)
+            {
+
+                giveRandomDeath();
+                Console.WriteLine("çalıştı");
+
+            }
+            else
+            {
+
+            }
+
+        }       
+    }
+    
     public void giveRandomDeath()
     {
         Random randomDeath = new Random();

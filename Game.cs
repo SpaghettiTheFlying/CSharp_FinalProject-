@@ -25,6 +25,7 @@ public class Game
         _selectedMap = new Map();
         _selectedMap.CreateMap();
     }
+
     
     #endregion
 
@@ -55,6 +56,9 @@ public class Game
         { 
             GetImput();
             ProcessImput();
+
+            _selectedMap.CastEvent();
+            _selectedMap.ExecuteTraps();
         }
     }
     
@@ -106,11 +110,14 @@ public class Game
     #endregion
 
     #region movement helper? idk
-    private void MovePlayer(int changeOnX, int changeOnY)
+    public void MovePlayer(int changeOnX, int changeOnY)
     {
+        
         _selectedMap.MoverPlayer(changeOnX, changeOnY);
 
         Console.WriteLine($"Current Location: ({_selectedMap.GetPlayerX}, {_selectedMap.GetPlayerY})");
+
+
     }
     #endregion
 }

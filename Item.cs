@@ -10,40 +10,42 @@ public class Item
 
     public class Letter : Item
     {
-        public void ReadableNotes(string Description)
+        public string Description { get; set; }
+
+        public Letter(string itemName, string description)
+        {
+            ItemName = itemName;
+            Description = description;
+        }
+
+        public void ReadableNotes()
         {
             Console.WriteLine($"Letter says:\n{Description}");
         }
-
     }
-
-    Letter letter1 = new Letter()
-    {
-        IsTaken = false,
-        ItemName = "Letter I."
-    };
-
     
     public class Necklace : Item
     {
 
     }
-    
-    Necklace goldNecklace = new Necklace()
+
+    public Item()
     {
-        IsTaken = false,
-        ItemName = "Golden Necklace"
-    };
+        Items = new List<Item>();
+    }
+
+
 
     public void TakeItem(Item item)
     {
-        if(item.IsTaken)
+        if(!item.IsTaken)
         {
-            return;
+            Console.WriteLine($"You found a {item.ItemName}");
+            item.IsTaken = true;
+
+            Items.Add(item);
+
         }
-        
-        Items.Add(item);
-        item.IsTaken = true;
 
     }
 
