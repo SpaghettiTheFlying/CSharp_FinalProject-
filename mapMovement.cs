@@ -15,7 +15,7 @@ public class Map
     public int _playerY;
 
     #endregion
-    public void CreateMap() //Main function
+    public void CreateMap() //Main function for map selection
     {
         Console.WriteLine("And I want you to select any map size between those:\n[1]5x5\n[2]7x7\n[3]9x9");
 
@@ -96,6 +96,58 @@ public class Map
     {
         get { return _playerY; }
     }
+
+    #region Events On Places
+
+    public void CastEvent()
+    {
+        switch (GetPlayerX, GetPlayerY)
+        {
+            case (2, -2):
+                //riddler
+                break;
+            case (4, 4):
+                //necklace
+                break;
+            case (1, 2):
+                //letter1
+                break;
+            case (-1, 3):
+                //letter2
+                break;
+
+        }
+
+    }
+
+    class Trap
+    {
+        public int TrapLocationX { get; set; }
+        public int TrapLocationY { get; set; }
+
+
+        public void ByRock()
+        {
+            Console.WriteLine("A Dwayne Johnson fell to your head. You died.");
+        }
+        public void ByHearthAttack()
+        {
+            Console.WriteLine("You have see a gigantic assignment. You had a hearth attack. You died.");
+        }
+        public void ByArrows()
+        {
+            Console.WriteLine("You stepped into a button. An arrow got stuck right next to your head.\n" +
+                "While you are trying to understand what is happened, dozens of arrows started to rain onto you.\n" +
+                "  You died.");
+        }
+
+    }
+
+
+
+
+
+    #endregion
 }
 
 

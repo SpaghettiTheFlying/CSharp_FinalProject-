@@ -88,6 +88,15 @@ public class Game
             case "exit":
                 Environment.Exit(0);
                 break;
+            case "help":
+                Console.WriteLine("w: go west\n" +
+                "e: go east\n" +
+                "n: go north\n" +
+                "s: go south\n" +
+                "examine: to examine environment or items\n" +
+                "exit: to close game\n" +
+                "");
+                break;
             default:
                 Console.WriteLine("Invalid command. :/");
                 break;
