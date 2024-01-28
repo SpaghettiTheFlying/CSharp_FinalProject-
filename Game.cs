@@ -2,8 +2,13 @@
 using CSharp_FinalProject;
 public class Game
 {
+    #region VARS
     private string _playerName;
-    private string playerInput; 
+    private string playerInput;
+
+    private Map _selectedMap;
+
+    #endregion
     public void GameStart(Game gameInstanceRef)
     {
         GetName();
@@ -14,13 +19,14 @@ public class Game
 
     }
 
+    #region kinda constructor?
     public void SelectedMap()
     {
-        Map _selectedMap = new Map();
-        _selectedMap._CreateMap();
+        _selectedMap = new Map();
+        _selectedMap.CreateMap();
     }
-
-
+    
+    #endregion
 
     #region Inputs and Responds
 
@@ -62,20 +68,26 @@ public class Game
         {
             case "w":
                 //-1 X
+                MovePlayer(-1, 0);
                 break;
             case "e":
                 //+1 X
+                MovePlayer(+1, 0);
                 break;
             case "n":
                 //+1 Y
+                MovePlayer(0, +1);
                 break;
             case "s":
                 //-1 Y
+                MovePlayer(0, -1);
                 break;
             case "examine":
                 //examine the clue or found object
                 break;
-            
+            case "exit":
+                Environment.Exit(0);
+                break;
             default:
                 Console.WriteLine("Invalid command. :/");
                 break;
@@ -84,4 +96,12 @@ public class Game
     }
     #endregion
 
+    #region movement helper? idk
+    private void MovePlayer(int changeOnX, int changeOnY)
+    {
+        _selectedMap.MoverPlayer(changeOnX, changeOnY);
+
+        Console.WriteLine($"Current Location: ({_selectedMap.GetPlayerX}, {_selectedMap.GetPlayerY})");
+    }
+    #endregion
 }
