@@ -5,10 +5,10 @@ using System.Threading.Channels;
 public class Map
 {
     #region VARS
-    public int mapBorders; 
-    
+    public int mapBorders;
+
     private bool settingMap = true;
-    
+
     private string playerInput;
 
     public int _playerX;
@@ -23,6 +23,8 @@ public class Map
 
 
     }
+
+    #region Map Selection
     private void StartMapSelection()
     {
         while (settingMap)
@@ -40,9 +42,9 @@ public class Map
     }
     private void ProcessInput() //Lets you select a map size
     {
-        switch (playerInput) 
-        
-        { 
+        switch (playerInput)
+
+        {
             case "1":
                 mapBorders = 5;
                 Console.WriteLine("5x5 map created.");
@@ -64,7 +66,9 @@ public class Map
         }
 
     }
+    #endregion
 
+    #region Movement
     public void MoverPlayer(int changeOnX, int changeOnY) //Changes current location values
     {
         int minX = -(mapBorders / 2);
@@ -87,10 +91,11 @@ public class Map
             _playerY = newPlayerY;
 
         }
-    } 
+    }
+    #endregion
     public int GetPlayerX
     {
-        get  { return _playerX; }
+        get { return _playerX; }
     }
     public int GetPlayerY
     {
@@ -120,30 +125,20 @@ public class Map
 
     }
 
-    class Trap
+    public void giveRandomDeath()
     {
-        public int TrapLocationX { get; set; }
-        public int TrapLocationY { get; set; }
+        Random randomDeath = new Random();
 
+        string[] DeathCauses = {    "A Dwayne Johnson fell to your head. You died." ,
+                                "You have see a gigantic assignment. You had a hearth attack. You died.",
+                                "You stepped into a button. An arrow got stuck right next to your head.\n" +
+                                "While you are trying to understand what is happened, dozens of arrows started to rain onto you.\n" +
+                                "You died."};
 
-        public void ByRock()
-        {
-            Console.WriteLine("A Dwayne Johnson fell to your head. You died.");
-        }
-        public void ByHearthAttack()
-        {
-            Console.WriteLine("You have see a gigantic assignment. You had a hearth attack. You died.");
-        }
-        public void ByArrows()
-        {
-            Console.WriteLine("You stepped into a button. An arrow got stuck right next to your head.\n" +
-                "While you are trying to understand what is happened, dozens of arrows started to rain onto you.\n" +
-                "  You died.");
-        }
+        int deathIndex = randomDeath.Next(DeathCauses.Length);
 
+        Console.WriteLine(DeathCauses[deathIndex]);
     }
-
-
 
 
 
