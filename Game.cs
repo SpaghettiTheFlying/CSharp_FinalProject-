@@ -6,7 +6,10 @@ public class Game
     private string _playerName;
     private string playerInput;
 
+    private bool hasLetter;
+
     private Map _selectedMap;
+    private Item itemGame;
 
     #endregion
     public void GameStart(Game gameInstanceRef)
@@ -27,6 +30,7 @@ public class Game
     }
 
     
+   
     #endregion
 
     #region Inputs and Responds
@@ -89,6 +93,14 @@ public class Game
             case "examine":
                 //examine the clue or found object
                 break;
+            case "letter":
+                if (_selectedMap.GetHasLetter)
+                {
+                    Item.Letter letter1 = new Item.Letter("Letter I.", "...ot ch-o-e C \nThere is blood on the letter. Couldn't read properly.");
+                    letter1.ReadableNotes();
+                }
+                else { Console.WriteLine("You don't have any letter."); }
+                break;
             case "exit":
                 Environment.Exit(0);
                 break;
@@ -99,7 +111,7 @@ public class Game
                 "s: go south\n" +
                 "examine: to examine environment or items\n" +
                 "exit: to close game\n" +
-                "");
+                "letter: read letter");
                 break;
             default:
                 Console.WriteLine("Invalid command. :/");

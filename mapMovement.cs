@@ -13,6 +13,12 @@ public class Map
 
     private string playerInput;
 
+    private bool hasLetter;
+    public bool GetHasLetter
+    {
+        get { return hasLetter; }
+    }
+
     public int _playerX;
     public int _playerY;
 
@@ -92,8 +98,11 @@ public class Map
             _playerX = newPlayerX;
             _playerY = newPlayerY;
 
+
         }
     }
+
+
     #endregion
     public int GetPlayerX
     {
@@ -114,15 +123,23 @@ public class Map
                 RiddleEvent();
                 break;
             case (4, 4):
+                Console.WriteLine("You found a 'Golden Necklace'");
                 Item.Necklace goldNecklace = new Item.Necklace { ItemName = "Golden Necklace" };
                 TakeItem(goldNecklace);
+                Console.WriteLine();
                 break;
             case (1, 2):
-                Item.Letter letter1 = new Item.Letter("Letter I.", "WRITE SOME TEXT HERE");
+                if (!hasLetter) 
+                {
+
+                Console.WriteLine("You found a letter!");
+                Item.Letter letter1 = new Item.Letter("Letter I.", "");
                 TakeItem(letter1);
-                letter1.ReadableNotes();
-                break;
+                hasLetter = true;
                 
+                }
+                break;
+             default: break;
         }
     }
     
@@ -170,17 +187,14 @@ public class Map
     public void ExecuteTraps() 
     { 
             
-        int[,] deathPoints =  { { -1, 1 }, { -2, -2 }, { 0, 2 }, { 3, -2 }, { 3, 2 }, { 3, 3 }, { 2, 3 }, { 1, -4 }, { -2, 4 }, { 4, 4 } };
+        int[,] deathPoints =  { { -1, 1 }, { -2, -2 }, { 0, 2 }, { 3, -2 }, { 3, 2 }, { 3, 3 }, { 2, 3 }, { 1, -4 }, { -2, 4 }, { 3, 4 } };
        
         for (int i = 0; i < 10;  i++) //Going through x coords
         {
 
             if (deathPoints[i, 0] == _playerX && deathPoints[i, 1] == _playerY)
             {
-
                 giveRandomDeath();
-                Console.WriteLine("çalıştı");
-
             }
             else
             {
@@ -203,6 +217,8 @@ public class Map
         int deathIndex = randomDeath.Next(DeathCauses.Length);
 
         Console.WriteLine(DeathCauses[deathIndex]);
+
+        Environment.Exit(0);
     }
 
 
