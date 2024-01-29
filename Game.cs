@@ -58,19 +58,19 @@ public class Game
     {
         while (true) 
         { 
-            GetImput();
-            ProcessImput();
+            GetInput();
+            ProcessInput();
 
             _selectedMap.CastEvent();
             _selectedMap.ExecuteTraps();
         }
     }
     
-    private void GetImput()
+    private void GetInput()
     {
         playerInput = Console.ReadLine();
     }
-    private void ProcessImput()
+    private void ProcessInput()
     {
         switch (playerInput) 
         {
