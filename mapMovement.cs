@@ -14,16 +14,39 @@ public class Map
     private string playerInput;
 
     private bool hasLetter;
-    public bool GetHasLetter
-    {
-        get { return hasLetter; }
-    }
+
+    private bool hasNecklace = false;
+
 
     public int _playerX;
     public int _playerY;
 
+
     private List<Item> items = new List<Item>();
+
+    #region Get-Set
+    public bool GetHasNecklace
+    {
+        get { return hasNecklace; }
+    }
+    public bool GetHasLetter
+    {
+        get { return hasLetter; }
+    }
+    public int GetPlayerX
+    {
+        get { return _playerX; }
+    }
+    public int GetPlayerY
+    {
+        get { return _playerY; }
+    }
+
     #endregion
+
+    #endregion
+
+    #region Map Selection
     public void CreateMap() //Main function for map selection
     {
         Console.WriteLine("And I want you to select any map size between those:\n[1]5x5\n[2]7x7\n[3]9x9");
@@ -31,8 +54,6 @@ public class Map
         StartMapSelection();
 
     }
-
-    #region Map Selection
     private void StartMapSelection()
     {
         while (settingMap)
@@ -104,14 +125,6 @@ public class Map
 
 
     #endregion
-    public int GetPlayerX
-    {
-        get { return _playerX; }
-    }
-    public int GetPlayerY
-    {
-        get { return _playerY; }
-    }
 
     #region Events On Places
 
@@ -126,7 +139,7 @@ public class Map
                 Console.WriteLine("You found a 'Golden Necklace'");
                 Item.Necklace goldNecklace = new Item.Necklace { ItemName = "Golden Necklace" };
                 TakeItem(goldNecklace);
-                Console.WriteLine();
+                hasNecklace = true;
                 break;
             case (1, 2):
                 if (!hasLetter) 
@@ -142,7 +155,6 @@ public class Map
              default: break;
         }
     }
-    
     public void SetGameInstance(Game game)
     {
         _game = game;
@@ -153,6 +165,7 @@ public class Map
         item.IsTaken = true;
     }
 
+    #region EVENTS
     public void RiddleEvent()
     {
         Console.WriteLine("You encounter the Riddler!");
@@ -164,7 +177,10 @@ public class Map
         Console.WriteLine("[c] A computer");
         Console.WriteLine("[d] A book");
         Console.WriteLine("[e] An elevator");
-
+        if (hasNecklace)
+        {
+            Console.WriteLine("[f] (Give 'Golden Necklace' to Riddler.)");
+        }
 
         string playerAnswer = Console.ReadLine();
 
@@ -172,15 +188,22 @@ public class Map
         if (playerAnswer == "b")
         {
             Console.WriteLine("Correct! You won!");
+            EndGame();
 
         }
-        else if(playerAnswer == null) 
+        else if(playerAnswer == null || playerAnswer == "") 
         {
             Console.WriteLine("Riddler got bored and gone, left you with your thoughts. You started a family and a decent life. But never found the answer. You died, peacefully.");
+            EndGame();
+        }
+        else if (playerAnswer == "f" && hasNecklace == true)
+        {
+            Console.WriteLine("You gave 'Golden Necklace' to Riddler. She loved it. You won!");
         }
         else
         {
             Console.WriteLine("Wrong answer! The Riddler vanishes. Place collapses. You died.");
+            EndGame();
         }
     }
 
@@ -221,9 +244,12 @@ public class Map
         Environment.Exit(0);
     }
 
+    public void EndGame()
+    {
+        Environment.Exit(0);
+    }
 
+    #endregion
 
     #endregion
 }
-
-

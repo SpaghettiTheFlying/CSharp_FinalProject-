@@ -28,9 +28,6 @@ public class Game
         _selectedMap = new Map();
         _selectedMap.CreateMap();
     }
-
-    
-   
     #endregion
 
     #region Inputs and Responds
